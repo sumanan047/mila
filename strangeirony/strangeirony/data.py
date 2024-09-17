@@ -1,4 +1,6 @@
 from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
@@ -69,6 +71,25 @@ def gen_histogram(df,save=True, figsize=(10,35),filename='histogram.pdf'):
     plt.show()
     return None
 
+def split_data(data=None, x=None,y=None, test_size=0.3):
+    """
+    Return Xtest, X_train, Y_Test, Y_Train
+    
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
+    
+    if data==None:
+        return train_test_split(x, y, test_size = test_size, random_state = 0)
+    else:
+        x = data.iloc[:,:-1].values
+        y = data.iloc[:,-1].values
+        return train_test_split(x, y, test_size = test_size, random_state = 0)
+
+
+
+
 if __name__ == "__main__":
     # Explore the data
     gen_test_data(data_type='lr')
@@ -77,3 +98,6 @@ if __name__ == "__main__":
     # check if data has na or null data, if it does do pre-processing seprate and then load
     # only good data
     invalid_count(df=df)
+    gen_histogram(df=df)
+    xtr,xt,ytr,yt =split_data(data=df)
+    model = LinearRegression()
