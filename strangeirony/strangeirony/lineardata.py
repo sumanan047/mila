@@ -158,7 +158,7 @@ class LinearModelData:
         return None
 
 if __name__ == "__main__":
-    lmd = LinearModelData(data_path='california_housing.csv')
+    lmd = LinearModelData(data_path=r'strangeirony/tests/california_housing.csv')
     lmd.load_data()
     lmd.preprocess(debug_print=False)
     lmd.write_report(naming_sugar="Cali_data", map=True, colormap_on='housing_median_age')
