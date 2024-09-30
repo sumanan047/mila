@@ -10,7 +10,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score
 import joblib
 
-class LinearRegressionModelSelector:
+class LinearModel:
     def __init__(self, X, y, test_size=0.15,validation_size = 0.10, random_state=42):
         self.X = X # feature data
         self.y = y # target data
@@ -77,14 +77,14 @@ class LinearRegressionModelSelector:
             joblib.dump(self.model, f'{name}.pkl')
 
 if __name__ == "__main__":
-    from lineardata import LinearModelData
+    from lineardata import LinearData
     #data
-    lmd = LinearModelData(data_path='strangeirony/tests/california_housing.csv')
+    lmd = LinearData(data_path='strangeirony/tests/california_housing.csv')
     lmd.load_data()
     lmd.preprocess(debug_print=False)
     lmd.write_report(naming_sugar="Cali_data", map=False, colormap_on='housing_median_age')
     # model
-    model_selector = LinearRegressionModelSelector(lmd.features_data, lmd.target_data)
+    model_selector = LinearModel(lmd.features_data, lmd.target_data)
     model_selector.split_data()
     model_selector.select_best_model(cv=2, verbose =1)
     model_selector.save(name='california_housing')

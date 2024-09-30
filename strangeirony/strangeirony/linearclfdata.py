@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-class LinearData:
+class LinearModelData:
     """
     This class will load a csv just for the purpose of providing data in a dataframe form to a
     linear regression model.
@@ -158,7 +158,7 @@ class LinearData:
         return None
 
 if __name__ == "__main__":
-    lmd = LinearData(data_path=r'strangeirony/tests/california_housing.csv')
+    lmd = LinearModelData(data_path=r'strangeirony/tests/california_housing.csv')
     lmd.load_data()
     lmd.preprocess(debug_print=False)
     lmd.write_report(naming_sugar="Cali_data", map=True, colormap_on='housing_median_age')
